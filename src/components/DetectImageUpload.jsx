@@ -1,72 +1,108 @@
-// import React, { useState } from 'react';
-// import axios from 'axios';
+import React, { useState } from 'react';
+import { API_BASE_URL } from '../config/api';
 
-// const DetectImageUpload = () => {
-//   const [image, setImage] = useState(null);
-//   const [result, setResult] = useState(null);
+const DetectImageUpload = () => {
+  const [image, setImage] = useState(null);
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-//   // Handle image selection
-//   const handleImageChange = (e) => {
-//     setImage(e.target.files[0]);
-//   };
+  // Handle image selection
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
 
-//   // Handle form submission
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!image) {
+      alert('Please select an image first!');
+      return;
+    }
 
-//     // Create FormData to send the image
-//     const formData = new FormData();
-//     formData.append('image', image);
+    setLoading(true);
+    setResult(null);
 
-//     try {
-//       // Send the image to the backend
-//       const response = await axios.post('http://localhost:3000/api/detect/detect-manipulation', formData, {
-//         headers: {
-//           'Content-Type': 'multipart/form-data',
-//         },
-//       });
+    // Create FormData to send the image
+    const formData = new FormData();
+    formData.append('image', image);
 
-//       // Set the result
-//       setResult(response.data);
-//     } catch (error) {
-//       console.error('Error detecting manipulation:', error);
-//       setResult({ error: 'An error occurred' });
-//     }
-//   };
+    try {
+      // Send the image to the backend
+      const response = await fetch(`${API_BASE_URL}/api/detect-manipulation`, {
+        method: 'POST',
+        headers: {
+          'Origin': 'https://sealsure.netlify.app'
+        },
+        body: formData,
+      });
 
-//   return (
-//     <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
-//       <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Upload an Image for Manipulation Detection</h2>
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
 
-//       {/* Image Upload Form */}
-//       <form onSubmit={handleSubmit} className="space-y-4">
-//         <div>
-//           <input 
-//             type="file" 
-//             onChange={handleImageChange} 
-//             className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
-//           />
-//         </div>
+      const data = await response.json();
+      setResult(data);
+    } catch (error) {
+      console.error('Error detecting manipulation:', error);
+      setResult({ error: 'An error occurred while processing the image' });
+    } finally {
+      setLoading(false);
+    }
+  };
 
-//         <button 
-//           type="submit" 
-//           className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
-//         >
-//           Detect Manipulation
-//         </button>
-//       </form>
+  return (
+    <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Upload an Image for Manipulation Detection</h2>
 
-//       {/* Result */}
-//       {result && (
-//         <div className="mt-6">
-//           <h3 className="text-xl font-medium text-gray-700">Result:</h3>
-//           <p className={`mt-2 ${result.manipulationDetected ? 'text-red-500' : 'text-green-500'}`}>
-//             {result.message || result.error}
-//           </p>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
+      {/* Image Upload Form */}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <input 
+            type="file" 
+            accept="image/*"
+            onChange={handleImageChange} 
+            className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+          />
+        </div>
 
-// export default DetectImageUpload;
+        <button 
+          type="submit" 
+          disabled={loading}
+          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200 disabled:opacity-50"
+        >
+          {loading ? 'Processing...' : 'Detect Manipulation'}
+        </button>
+      </form>
+
+      {/* Result */}
+      {result && (
+        <div className="mt-6">
+          <h3 className="text-xl font-medium text-gray-700">Result:</h3>
+          <div className="mt-4 p-4 bg-gray-100 rounded-lg">
+            {result.error ? (
+              <p className="text-red-500">{result.error}</p>
+            ) : (
+              <div>
+                <p className={`text-lg font-medium ${result.manipulationDetected ? 'text-red-500' : 'text-green-500'}`}>
+                  {result.manipulationDetected ? '⚠️ Manipulation Detected!' : '✅ No Manipulation Found'}
+                </p>
+                {result.confidence && (
+                  <p className="text-sm text-gray-600 mt-2">
+                    Confidence: {(result.confidence * 100).toFixed(1)}%
+                  </p>
+                )}
+                {result.message && (
+                  <p className="text-sm text-gray-700 mt-2">{result.message}</p>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+    </div>
+  );
+};
+
+export default DetectImageUpload;

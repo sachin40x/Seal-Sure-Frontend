@@ -42,6 +42,9 @@ const BankStatement = () => {
         try {
             const response = await fetch(`${API_BASE_URL}/api/detect-tables`, {
                 method: 'POST',
+                headers: {
+                    'Origin': 'https://sealsure.netlify.app'
+                },
                 body: formData,
             });
 

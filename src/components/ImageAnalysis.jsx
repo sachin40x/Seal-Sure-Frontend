@@ -23,7 +23,7 @@ const ImageAnalysis = () => {
         formData.append('file', file);
 
         try {
-            const response = await axios.post(`${API_BASE_URL}/process-image`, formData, {
+            const response = await axios.post(`${API_BASE_URL}/api/detect-manipulation`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Origin': 'https://sealsure.netlify.app'
