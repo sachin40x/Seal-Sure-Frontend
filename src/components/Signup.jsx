@@ -29,7 +29,13 @@ function Signup() {
         }
 
         try {
-            const response = await axios.post(`${API_BASE_URL}/api/signup`, formData);
+            console.log('Attempting to sign up with:', API_BASE_URL);
+            const response = await axios.post(`${API_BASE_URL}/api/signup`, formData, {
+                timeout: 10000, // 10 second timeout
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
 
             if (response.status === 201) {
                 localStorage.setItem('token', response.data.token);
@@ -37,11 +43,17 @@ function Signup() {
                 navigate('/');
             }
         } catch (error) {
+            console.error('Signup error:', error);
             if (error.response) {
+                console.error('Response error:', error.response.data);
                 setError(error.response.data.message || 'An error occurred. Please try again.');
             } else if (error.request) {
-                setError('No response from the server. Please try again.');
+                console.error('Request error:', error.request);
+                setError('No response from the server. Please check your internet connection and try again.');
+            } else if (error.code === 'ECONNABORTED') {
+                setError('Request timeout. Please try again.');
             } else {
+                console.error('Other error:', error.message);
                 setError('An error occurred. Please try again.');
             }
         }
