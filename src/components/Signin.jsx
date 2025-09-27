@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../config/api';
-import ApiHealthCheck from './ApiHealthCheck';
 
 function Signin() {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -67,10 +66,9 @@ function Signin() {
 
 
     return (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <h1 className="text-3xl font-bold text-blue-900 mb-6">Sign in</h1>
-                <ApiHealthCheck />
                 {error && <p className="text-red-500 mb-4">{error}</p>}
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                     <label htmlFor="email" className="sr-only">Email</label>
