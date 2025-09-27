@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 function Signin() {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -28,7 +29,7 @@ function Signin() {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/api/signin', formData);
+            const response = await axios.post(`${API_BASE_URL}/api/signin`, formData);
 
             if (response.status === 200) {
                 const { token, username } = response.data; // Destructure the response

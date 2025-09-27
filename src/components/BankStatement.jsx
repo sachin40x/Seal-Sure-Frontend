@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE_URL } from '../config/api';
 
 const BankStatement = () => {
     const [image, setImage] = useState(null);
@@ -39,7 +40,7 @@ const BankStatement = () => {
         formData.append('file', image);
 
         try {
-            const response = await fetch('http://localhost:5000/api/detect-tables', {
+            const response = await fetch(`${API_BASE_URL}/api/detect-tables`, {
                 method: 'POST',
                 body: formData,
             });
@@ -55,7 +56,7 @@ const BankStatement = () => {
                 alert(data.error);
             } else {
                 setDetectedTables(data.detected_tables);
-                setResultImageUrl(`http://localhost:5000/api/outputs/${data.result_image}`);
+                setResultImageUrl(`${API_BASE_URL}/api/outputs/${data.result_image}`);
                 setValidationResult(data.validation);
                 
                 // Set appropriate message based on validation status

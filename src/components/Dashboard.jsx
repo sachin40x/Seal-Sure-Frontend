@@ -4,6 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import data from '../data/data.json'; // Import the data directly if it's available locally
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 const Dashboard = () => {
   const [chartData, setChartData] = useState(data);
@@ -53,7 +54,7 @@ const Dashboard = () => {
       const formData = new FormData();
       formData.append('document', selectedFile);
 
-      const response = await fetch('http://localhost:5000/api/process-document', {
+      const response = await fetch(`${API_BASE_URL}/api/process-document`, {
         method: 'POST',
         body: formData,
       });

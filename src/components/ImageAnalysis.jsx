@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 const ImageAnalysis = () => {
     const [file, setFile] = useState(null);
@@ -22,7 +23,7 @@ const ImageAnalysis = () => {
         formData.append('file', file);
 
         try {
-            const response = await axios.post('http://localhost:5000/process-image', formData, {
+            const response = await axios.post(`${API_BASE_URL}/process-image`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -54,7 +55,7 @@ const ImageAnalysis = () => {
             {imageUrl && (
                 <div>
                     <h2>Processed Image</h2>
-                    <img src={`http://localhost:5000/${imageUrl}`} alt="Processed" style={{ maxWidth: '100%' }} />
+                    <img src={`${API_BASE_URL}/${imageUrl}`} alt="Processed" style={{ maxWidth: '100%' }} />
                     {tamperedBox && (
                         <div>
                             <p>Tampered region found!</p>

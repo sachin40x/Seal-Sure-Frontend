@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 import Tesseract from 'tesseract.js';
 import * as pdfjsLib from 'pdfjs-dist';
 import mammoth from 'mammoth';
@@ -33,7 +34,7 @@ const DocumentTextExtractor = () => {
     formData.append('image', file);
 
     try {
-      const res = await axios.post('http://localhost:5000/verify-code', formData, {
+      const res = await axios.post(`${API_BASE_URL}/verify-code`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 

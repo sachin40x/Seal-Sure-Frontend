@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 const AdminDashboard = () => {
   const [analytics, setAnalytics] = useState(null);
@@ -13,7 +14,7 @@ const AdminDashboard = () => {
 
   const fetchAnalytics = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/analytics/daily');
+      const response = await axios.get(`${API_BASE_URL}/api/analytics/daily`);
       setAnalytics(response.data);
     } catch (error) {
       console.error('Error fetching analytics:', error);
@@ -55,7 +56,7 @@ const AdminDashboard = () => {
 
   const fetchSystemHealth = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/analytics/system-health');
+      const response = await axios.get(`${API_BASE_URL}/api/analytics/system-health`);
       setSystemHealth(response.data);
     } catch (error) {
       console.error('Error fetching system health:', error);
