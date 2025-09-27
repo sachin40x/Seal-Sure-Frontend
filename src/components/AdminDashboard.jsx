@@ -14,7 +14,11 @@ const AdminDashboard = () => {
 
   const fetchAnalytics = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/analytics/daily`);
+      const response = await axios.get(`${API_BASE_URL}/api/analytics/daily`, {
+        headers: {
+          'Origin': 'https://sealsure.netlify.app'
+        }
+      });
       setAnalytics(response.data);
     } catch (error) {
       console.error('Error fetching analytics:', error);
@@ -56,7 +60,11 @@ const AdminDashboard = () => {
 
   const fetchSystemHealth = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/analytics/system-health`);
+      const response = await axios.get(`${API_BASE_URL}/api/analytics/system-health`, {
+        headers: {
+          'Origin': 'https://sealsure.netlify.app'
+        }
+      });
       setSystemHealth(response.data);
     } catch (error) {
       console.error('Error fetching system health:', error);

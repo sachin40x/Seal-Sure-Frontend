@@ -35,7 +35,10 @@ const DocumentTextExtractor = () => {
 
     try {
       const res = await axios.post(`${API_BASE_URL}/verify-code`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+        headers: { 
+          'Content-Type': 'multipart/form-data',
+          'Origin': 'https://sealsure.netlify.app'
+        },
       });
 
       setVerificationResponse(res.data);

@@ -24,7 +24,11 @@ const DocumentHistory = () => {
       params.append('page', filters.page);
       params.append('limit', '10');
 
-      const response = await axios.get(`${API_BASE_URL}/api/documents/user/1?${params}`);
+      const response = await axios.get(`${API_BASE_URL}/api/documents/user/1?${params}`, {
+        headers: {
+          'Origin': 'https://sealsure.netlify.app'
+        }
+      });
       setDocuments(response.data.documents);
     } catch (error) {
       console.error('Error fetching documents:', error);

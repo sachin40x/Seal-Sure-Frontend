@@ -34,6 +34,7 @@ function Signin() {
                 timeout: 10000,
                 headers: {
                     'Content-Type': 'application/json',
+                    'Origin': 'https://sealsure.netlify.app'
                 }
             });
 

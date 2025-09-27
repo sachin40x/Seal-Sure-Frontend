@@ -26,6 +26,7 @@ const ImageAnalysis = () => {
             const response = await axios.post(`${API_BASE_URL}/process-image`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    'Origin': 'https://sealsure.netlify.app'
                 },
             });
 
