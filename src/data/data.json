@@ -1,0 +1,99 @@
+[
+    {
+      "date": "2025-03-01",
+      "documentsProcessed": 50,
+      "modelIdentified": "Invoice",
+      "documentTypeDistribution": {
+        "Invoice": 20,
+        "Receipt": 15,
+        "Contract": 10,
+        "Other": 5
+      },
+      "performance": 85
+    },
+    {
+      "date": "2025-03-02",
+      "documentsProcessed": 70,
+      "modelIdentified": "Invoice",
+      "documentTypeDistribution": {
+        "Invoice": 30,
+        "Receipt": 20,
+        "Contract": 15,
+        "Other": 5
+      },
+      "performance": 78
+    },
+    {
+      "date": "2025-03-03",
+      "documentsProcessed": 60,
+      "modelIdentified": "Receipt",
+      "documentTypeDistribution": {
+        "Invoice": 20,
+        "Receipt": 30,
+        "Contract": 5,
+        "Other": 5
+      },
+      "performance": 82
+    },
+    {
+      "date": "2025-03-04",
+      "documentsProcessed": 90,
+      "modelIdentified": "Invoice",
+      "documentTypeDistribution": {
+        "Invoice": 40,
+        "Receipt": 30,
+        "Contract": 10,
+        "Other": 10
+      },
+      "performance": 88
+    },
+    {
+      "date": "2025-03-05",
+      "documentsProcessed": 65,
+      "modelIdentified": "Contract",
+      "documentTypeDistribution": {
+        "Invoice": 20,
+        "Receipt": 25,
+        "Contract": 15,
+        "Other": 5
+      },
+      "performance": 77
+    },
+    {
+      "date": "2025-03-06",
+      "documentsProcessed": 80,
+      "modelIdentified": "Receipt",
+      "documentTypeDistribution": {
+        "Invoice": 25,
+        "Receipt": 40,
+        "Contract": 10,
+        "Other": 5
+      },
+      "performance": 90
+    },
+    {
+      "date": "2025-03-07",
+      "documentsProcessed": 50,
+      "modelIdentified": "Contract",
+      "documentTypeDistribution": {
+        "Invoice": 15,
+        "Receipt": 20,
+        "Contract": 10,
+        "Other": 5
+      },
+      "performance": 85
+    },
+    {
+      "date": "2025-03-08",
+      "documentsProcessed": 75,
+      "modelIdentified": "Invoice",
+      "documentTypeDistribution": {
+        "Invoice": 35,
+        "Receipt": 25,
+        "Contract": 10,
+        "Other": 5
+      },
+      "performance": 92
+    }
+  ]
+  

@@ -1,0 +1,150 @@
+[
+  {
+    "id": 1,
+    "user": "User 1",
+    "email": "user1@example.com",
+    "phone": "123-456-7890",
+    "documents": [
+      {
+        "id": 1,
+        "type": "Aadhaar Card",
+        "status": "Accepted",
+        "file": "/images/aadhaar-card.jpg"
+      },
+      {
+        "id": 2,
+        "type": "PAN Card",
+        "status": "Rejected",
+        "file": "/files/pan-card.pdf"
+      },
+      {
+        "id": 3,
+        "type": "Bank Statement",
+        "status": "Rejected",
+        "file": "/images/bank-statement.jpg"
+      },
+      {
+        "id": 4,
+        "type": "ITR",
+        "status": "Rejected",
+        "file": "/files/itr.pdf"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "user": "User 2",
+    "email": "user2@example.com",
+    "phone": "234-567-8901",
+    "documents": [
+      {
+        "id": 5,
+        "type": "Aadhaar Card",
+        "status": "Rejected",
+        "file": "/images/aadhaar-card.jpg"
+      },
+      {
+        "id": 6,
+        "type": "PAN Card",
+        "status": "Accepted",
+        "file": "/files/pan-card.pdf"
+      },
+      {
+        "id": 7,
+        "type": "Bank Statement",
+        "status": "Rejected",
+        "file": "/images/bank-statement.jpg"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "user": "User 3",
+    "email": "user3@example.com",
+    "phone": "345-678-9012",
+    "documents": [
+      {
+        "id": 8,
+        "type": "Aadhaar Card",
+        "status": "Accepted",
+        "file": "/images/aadhaar-card.jpg"
+      },
+      {
+        "id": 9,
+        "type": "PAN Card",
+        "status": "Rejected",
+        "file": "/files/pan-card.pdf"
+      },
+      {
+        "id": 10,
+        "type": "Bank Statement",
+        "status": "Rejected",
+        "file": "/images/bank-statement.jpg"
+      },
+      {
+        "id": 11,
+        "type": "ITR",
+        "status": "Rejected",
+        "file": "/files/itr.pdf"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "user": "User 4",
+    "email": "user4@example.com",
+    "phone": "456-789-0123",
+    "documents": [
+      {
+        "id": 12,
+        "type": "Aadhaar Card",
+        "status": "Accepted",
+        "file": "/images/aadhaar-card.jpg"
+      },
+      {
+        "id": 13,
+        "type": "PAN Card",
+        "status": "Accepted",
+        "file": "/files/pan-card.pdf"
+      },
+      {
+        "id": 14,
+        "type": "Bank Statement",
+        "status": "Rejected",
+        "file": "/images/bank-statement.jpg"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "user": "User 5",
+    "email": "user5@example.com",
+    "phone": "567-890-1234",
+    "documents": [
+      {
+        "id": 15,
+        "type": "Aadhaar Card",
+        "status": "Rejected",
+        "file": "/images/aadhaar-card.jpg"
+      },
+      {
+        "id": 16,
+        "type": "PAN Card",
+        "status": "Rejected",
+        "file": "/files/pan-card.pdf"
+      },
+      {
+        "id": 17,
+        "type": "Bank Statement",
+        "status": "Accepted",
+        "file": "/images/bank-statement.jpg"
+      },
+      {
+        "id": 18,
+        "type": "ITR",
+        "status": "Rejected",
+        "file": "/files/itr.pdf"
+      }
+    ]
+  }
+]
