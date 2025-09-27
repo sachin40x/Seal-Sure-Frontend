@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../config/api';
 import ApiHealthCheck from './ApiHealthCheck';
-import { mockSignin, isBackendAvailable } from '../utils/mockAuth';
 
 function Signin() {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -32,50 +31,37 @@ function Signin() {
 
         try {
             console.log('Attempting to sign in with:', API_BASE_URL);
-            
-            // Check if backend is available
-            const backendAvailable = await isBackendAvailable();
-            
-            if (backendAvailable) {
-                // Try real API first
-                try {
-                    const response = await axios.post(`${API_BASE_URL}/api/signin`, formData, {
-                        timeout: 10000,
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    });
-
-                    if (response.status === 200) {
-                        const { token, username } = response.data;
-                        localStorage.setItem('token', token);
-                        if (username) {
-                            localStorage.setItem('username', username);
-                        }
-                        navigate('/');
-                        return;
-                    }
-                } catch (apiError) {
-                    console.log('API failed, trying mock authentication...');
+            const response = await axios.post(`${API_BASE_URL}/api/signin`, formData, {
+                timeout: 10000,
+                headers: {
+                    'Content-Type': 'application/json',
                 }
-            }
-            
-            // Fallback to mock authentication
-            console.log('Using mock authentication...');
-            const mockResult = await mockSignin(formData.email, formData.password);
-            
-            if (mockResult.success) {
-                localStorage.setItem('token', mockResult.token);
-                localStorage.setItem('username', mockResult.username);
-                alert(mockResult.message);
+            });
+
+            if (response.status === 200) {
+                const { token, username } = response.data;
+                localStorage.setItem('token', token);
+                if (username) {
+                    localStorage.setItem('username', username);
+                }
                 navigate('/');
-            } else {
-                setError(mockResult.message);
             }
-            
         } catch (error) {
             console.error('Signin error:', error);
-            setError('An error occurred. Please try again.');
+            if (error.response && error.response.status === 404) {
+                setError('Authentication endpoints not configured on backend. Please contact administrator.');
+            } else if (error.response) {
+                console.error('Response error:', error.response.data);
+                setError(error.response.data.message || 'Invalid credentials. Please try again.');
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                setError('No response from the server. Please check your internet connection and try again.');
+            } else if (error.code === 'ECONNABORTED') {
+                setError('Request timeout. Please try again.');
+            } else {
+                console.error('Other error:', error.message);
+                setError('An error occurred. Please try again.');
+            }
         }
     };
 

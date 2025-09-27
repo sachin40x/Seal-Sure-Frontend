@@ -31,7 +31,7 @@ function Signup() {
         try {
             console.log('Attempting to sign up with:', API_BASE_URL);
             const response = await axios.post(`${API_BASE_URL}/api/signup`, formData, {
-                timeout: 10000, // 10 second timeout
+                timeout: 10000,
                 headers: {
                     'Content-Type': 'application/json',
                 }
